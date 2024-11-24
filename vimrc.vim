@@ -25,6 +25,19 @@ Plug 'f-person/git-blame.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'github/copilot.vim'
 Plug 'Vigemus/iron.nvim'
+Plug 'hat0uma/csvview.nvim'
+" If you have nodejs
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'williamboman/mason.nvim'
+Plug 'nvim-java/lua-async-await'
+Plug 'nvim-java/nvim-java-refactor'
+Plug 'nvim-java/nvim-java-core'
+Plug 'nvim-java/nvim-java-test'
+Plug 'nvim-java/nvim-java-dap'
+Plug 'neovim/nvim-lspconfig'
+Plug 'mfussenegger/nvim-dap'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-java/nvim-java'
 
 call plug#end()
 
