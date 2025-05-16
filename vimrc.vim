@@ -2,11 +2,11 @@
 let g:denops#deno = '/Users/fernandoandrefernandes/.deno/bin/deno'
 
 call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'davidhalter/jedi-vim'
+Plug 'folke/lazy.nvim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/ddu.vim'
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'
@@ -29,31 +29,37 @@ Plug 'hat0uma/csvview.nvim'
 " If you have nodejs
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'williamboman/mason.nvim'
-Plug 'nvim-java/lua-async-await'
-Plug 'nvim-java/nvim-java-refactor'
-Plug 'nvim-java/nvim-java-core'
-Plug 'nvim-java/nvim-java-test'
-Plug 'nvim-java/nvim-java-dap'
+" Plug 'nvim-java/lua-async-await'
+" Plug 'nvim-java/nvim-java-refactor'
+" Plug 'nvim-java/nvim-java-core'
+" Plug 'nvim-java/nvim-java-test'
+" Plug 'nvim-java/nvim-java-dap'
 Plug 'neovim/nvim-lspconfig'
 Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-jdtls'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'nvim-java/nvim-java'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" Plug 'nvim-java/nvim-java'
 
 call plug#end()
 
 
 let mapleader = ","
 
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_stubs_command = "<leader>s"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#rename_command_keep_name = "<leader>R"
-let g:jedi#use_splits_not_buffers = "right"
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_stubs_command = "<leader>s"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#rename_command = "<leader>r"
+" let g:jedi#rename_command_keep_name = "<leader>R"
+" let g:jedi#use_splits_not_buffers = "right"
 let g:airline_theme='dark_minimal'
 
 " set highlight duration time to 1000 ms, i.e., 1 second

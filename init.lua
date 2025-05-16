@@ -1,6 +1,7 @@
 local vimrc = vim.fn.stdpath("config") .. "/vimrc.vim"
 vim.cmd.source(vimrc)
 
+
 local iron = require("iron.core")
 
 iron.setup {
@@ -99,7 +100,98 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+local map = function(type, key, value)
+	vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
+end
+
+local custom_attach = function(client)
+	print("LSP started.");
+
+		  -- Set up nvim-cmp.
+	local cmp = require'cmp'
+
+	cmp.setup({
+		snippet = {
+		-- REQUIRED - you must specify a snippet engine
+			expand = function(args)
+			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+			-- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+		      end,
+		    },
+		window = {
+		      -- completion = cmp.config.window.bordered(),
+		      -- documentation = cmp.config.window.bordered(),
+		},
+		mapping = cmp.mapping.preset.insert({
+		      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+		      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+		      ['<C-Space>'] = cmp.mapping.complete(),
+		      ['<C-e>'] = cmp.mapping.abort(),
+		      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		}),
+		sources = cmp.config.sources({
+		      { name = 'nvim_lsp' },
+		      { name = 'vsnip' }, -- For vsnip users.
+		      -- { name = 'luasnip' }, -- For luasnip users.
+		      -- { name = 'ultisnips' }, -- For ultisnips users.
+		      -- { name = 'snippy' }, -- For snippy users.
+		    },
+		    {
+		      { name = 'buffer' },
+		    }
+		)
+	    }
+	)
+
+	map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
+	map('n','<leader>d','<cmd>lua vim.lsp.buf.definition()<CR>')
+	map('n','K','<cmd>lua vim.lsp.buf.hover()<CR>')
+	map('n','gr','<cmd>lua vim.lsp.buf.references()<CR>')
+	map('n','gs','<cmd>lua vim.lsp.buf.signature_help()<CR>')
+	map('n','gi','<cmd>lua vim.lsp.buf.implementation()<CR>')
+	map('n','gt','<cmd>lua vim.lsp.buf.type_definition()<CR>')
+	map('n','<leader>gw','<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+	map('n','<leader>gW','<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+	map('n','<leader>ah','<cmd>lua vim.lsp.buf.hover()<CR>')
+	map('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
+	map('n','<leader>ee','<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>')
+	map('n','<leader>ar','<cmd>lua vim.lsp.buf.rename()<CR>')
+	map('n','<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+	map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
+	map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
+end
+
+local lspconfig = require("lspconfig")
+lspconfig.pyright.setup{
+	on_attach=custom_attach,
+	root_dir = vim.fs.dirname(vim.fs.find({'pyproject.toml', 'poetry.lock', '.git'}, { upward = true })[1]),
+	command={"/Users/fernandoandrefernandes/.nvm/versions/node/v20.15.1/bin/pyright"},
+	filetypes = { 'python' },
+}
+
+
 require('csvview').setup()
 require("mason").setup()
--- require('java').setup()
---require('lspconfig').jdtls.setup({})
+
+-- local lspconfig = require("lspconfig")
+lspconfig.elixirls.setup({
+	-- you need to specify the executable command mannualy for elixir-ls
+	cmd = { "/Users/fernandoandrefernandes/.vscode/extensions/jakebecker.elixir-ls-0.24.2/elixir-ls-release/language_server.sh" },
+	on_attach = custom_attach
+})
+
+lspconfig.clangd.setup({
+	cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},
+	root_markers = { '.clangd', 'compile_commands.json' },
+	on_attach = custom_attach
+})
+
+local config = {
+    cmd = {'/Users/fernandoandrefernandes/jdt-language-server-1.46.0-202502271940/bin/jdtls'},
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+    on_attach = custom_attach
+}
+lspconfig.jdtls.setup(config)
