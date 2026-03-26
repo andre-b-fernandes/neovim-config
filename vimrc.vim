@@ -3,6 +3,7 @@ let g:denops#deno = '/Users/fernandoandrefernandes/.deno/bin/deno'
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'folke/lazy.nvim'
+Plug 'preservim/nerdtree'
 " Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/ddu.vim'
@@ -23,7 +24,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'f-person/git-blame.nvim'
 " Use release branch (recommended)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 Plug 'Vigemus/iron.nvim'
 Plug 'hat0uma/csvview.nvim'
 " If you have nodejs
@@ -43,6 +44,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'coder/claudecode.nvim'
 " Plug 'nvim-java/nvim-java'
 
 call plug#end()
