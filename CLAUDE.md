@@ -54,6 +54,7 @@ Leader key: `,`
 - `,f` - Telescope live grep
 
 **LSP** (only active when LSP attaches):
+- `K` - Show hover documentation/signature for symbol under cursor
 - `,d` - Go to definition
 - `,ar` - Rename symbol
 - `,an` - Code actions
@@ -99,4 +100,3 @@ Leader key: `,`
 
 - `lazy-lock.json` - Plugin version lockfile (commit this)
 - `compile_flags.txt` - C/C++ compiler flags for clangd
-- `vimrc.vim.backup`, `vimrc.vim.old`, `init.lua.backup` - Legacy/backup files (can be deleted if not needed)
